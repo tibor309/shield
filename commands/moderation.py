@@ -12,7 +12,7 @@ class moderation(commands.Cog):
     @discord.commands.default_permissions(kick_members=True)
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("reason", str, description="Add a reason (optional)", required=False)
-    async def ban(self, ctx: commands.Context, member: discord.Member, reason: str = "*no reason given*") -> None:
+    async def kick(self, ctx: commands.Context, member: discord.Member, reason: str = "*No reason given*") -> None:
         create_time = int(member.created_at.timestamp())
         join_time = int(member.joined_at.timestamp())
 
@@ -32,6 +32,33 @@ class moderation(commands.Cog):
             await ctx.respond(embed=embed)
         except:
             await ctx.respond(f"Can't kick {member.mention}! Probably missing permissions, or you're trying to kick someone higher than me", ephemeral=True)
+
+
+
+    @discord.slash_command(name="ban", description="Ban a member", guild_only=True)
+    @discord.commands.default_permissions(ban_members=True)
+    @discord.option("member", discord.Member, description="Select a member", required=True)
+    @discord.option("reason", str, description="Add a reason (optional)", required=False)
+    async def ban(self, ctx: commands.Context, member: discord.Member, reason: str = "*No reason given*") -> None:
+        create_time = int(member.created_at.timestamp())
+        join_time = int(member.joined_at.timestamp())
+
+        if member == ctx.author:
+            return await ctx.respond(f"You can't ban yourself", ephemeral=True)
+        elif member == self.bot.user:
+            return await ctx.respond("I'm not banning myself", ephemeral=True)
+
+        embed = discord.Embed(color=bot_color, title=f"{member.name} has been banned!", description=f"**Reason:**\n{reason}", timestamp=discord.utils.utcnow())
+        embed.set_author(name="Member banned", icon_url=member_icon)
+        embed.add_field(name="Account Created", value=f"<t:{create_time}:R>")
+        embed.add_field(name="Joined Server", value=f"<t:{join_time}:R>")
+        embed.set_thumbnail(url=member.avatar)
+
+        try:
+            await member.ban(reason=f"{reason} - banned by @{ctx.author.name}")
+            await ctx.respond(embed=embed)
+        except:
+            await ctx.respond(f"Can't ban {member.mention}! Probably missing permissions, or you're trying to ban someone higher than me", ephemeral=True)
 
 
 
