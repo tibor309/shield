@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import datetime
 from config import bot_color, member_icon
 
 class moderation(commands.Cog):
@@ -87,6 +88,33 @@ class moderation(commands.Cog):
             await ctx.respond(embed=embed)
         except:
             await ctx.respond(f"Fauled to softban {member.mention}! Probably missing permissions, or you're trying to softban someone higher than me", ephemeral=True)
+
+
+
+    @discord.slash_command(name="timeout", description="Timeout a member", guild_only=True)
+    @discord.commands.default_permissions(moderate_members=True)
+    @discord.option("member", discord.Member, description="Select a member", required=True)
+    @discord.option("minutes", int, description="Timeout duration", required=True)
+    @discord.option("reason", str, description="Add a reason (optional)", required=False)
+    async def unban(self, ctx: commands.Context, member: discord.Member, minutes: int, reason: str = "*No reason given*") -> None:
+        duration = datetime.timedelta(minutes=minutes)
+
+        if member == ctx.author:
+            return await ctx.respond(f"You can't timeout yourself", ephemeral=True)
+        elif member == self.bot.user:
+            return await ctx.respond("Nuh uh!", ephemeral=True)
+
+        embed = discord.Embed(color=bot_color, title=f"{member.name} has been timed out!", description=f"**Duration:** {minutes} minutes\n**Reason:** {reason}", timestamp=discord.utils.utcnow())
+        embed.set_author(name="Member timed out", icon_url=member_icon)
+        embed.set_thumbnail(url=member.avatar)
+
+        try:
+            duration = datetime.timedelta(minutes=minutes)
+            await member.timeout_for(duration, reason=f"{reason} - timed out by @{ctx.author.name}")
+        except:
+            await ctx.respond(f"Can't time out {member.mention}! Probably missing permissions, or you're trying to time out someone higher than me", ephemeral=True)
+
+        await ctx.respond(embed=embed)
 
 
 
