@@ -4,6 +4,8 @@ import os
 from config import bot_time, bot_token
 
 intents = discord.Intents.default()
+intents.members = True
+intents.presences = True
 bot = commands.Bot(intents=intents, help_command=None)
 
 # load commands
