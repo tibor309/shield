@@ -47,14 +47,14 @@ async def on_message(message):
 bot.run(bot_token)
 
 # TODO:
-# moderation commands (kick, ban, etc.)
-# timeout members
-# purge messages
+# moderation commands (kick, ban, etc.) - done
+# timeout members - done
+# purge messages - done
 # give/revoke roles
 # delete server invites
-# lock/unlock channel
-# set nickname for a member
-# softban members
-# un/deafen members
-# mute members
-# member info
+# lock/unlock channel - done
+# set nickname for a member - done
+# softban members - done
+# un/deafen members - done
+# mute members - done
+# member info - done
