@@ -51,5 +51,28 @@ class member(commands.Cog):
 
 
 
+    @discord.slash_command(name="mute", description="Server mute a member", guild_only=True)
+    @discord.commands.default_permissions(mute_members=True)
+    @discord.option("member", discord.Member, description="Select a member", required=True)
+    @discord.option("state", bool, description="Toggle mute", required=True)
+    async def mute(self, ctx: commands.Context, member: discord.Member, state: bool) -> None:
+        if member == ctx.author:
+            return await ctx.respond(f"You can't server mute yourself!", ephemeral=True)
+        elif member == self.bot.user:
+            return await ctx.respond("you can't do that", ephemeral=True)
+
+        try:
+            if state == True:
+                await member.edit(mute=True, reason=f"executed by @{ctx.author.name}")
+                await ctx.respond(f"Server muted {member.mention}", ephemeral=True)
+
+            elif state == False:
+                await member.edit(mute=False, reason=f"executed by @{ctx.author.name}")
+                await ctx.respond(f"Unmuted {member.mention}", ephemeral=True)
+        except:
+            return await ctx.respond(f"Failed to server un/mute {member.mention}.", ephemeral=True)
+
+
+
 def setup(bot: commands.Bot) -> None:
     bot.add_cog(member(bot))
