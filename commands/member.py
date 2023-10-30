@@ -28,5 +28,28 @@ class member(commands.Cog):
 
 
 
+    @discord.slash_command(name="deafen", description="Server deafen a member", guild_only=True)
+    @discord.commands.default_permissions(deafen_members=True)
+    @discord.option("member", discord.Member, description="Select a member", required=True)
+    @discord.option("state", bool, description="Toggle deafen", required=True)
+    async def deafen(self, ctx: commands.Context, member: discord.Member, state: bool) -> None:
+        if member == ctx.author:
+            return await ctx.respond(f"You can't server deafen yourself!", ephemeral=True)
+        elif member == self.bot.user:
+            return await ctx.respond("you can't do that", ephemeral=True)
+
+        try:
+            if state == True:
+                await member.edit(deafen=True, reason=f"executed by @{ctx.author.name}")
+                await ctx.respond(f"Server deafened {member.mention}", ephemeral=True)
+
+            elif state == False:
+                await member.edit(deafen=False, reason=f"executed by @{ctx.author.name}")
+                await ctx.respond(f"Undeafened {member.mention}", ephemeral=True)
+        except:
+            return await ctx.respond(f"Failed to server un/deafen {member.mention}.", ephemeral=True)
+
+
+
 def setup(bot: commands.Bot) -> None:
     bot.add_cog(member(bot))
