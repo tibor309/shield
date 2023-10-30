@@ -16,6 +16,15 @@ for f in os.listdir("./commands"):
         #else:
             print((discord.utils.utcnow().strftime(f"[{bot_time}]")),f"Loaded {f}")
 
+for f in os.listdir("./context_menus"):
+    if f.endswith(".py"):
+        #try:
+            bot.load_extension("context_menus." + f[:-3])
+        #except Exception as error:
+            #print((discord.utils.utcnow().strftime(f"[{bot_time}]")), f"ERROR {f} could not be loaded: {error}")
+        #else:
+            print((discord.utils.utcnow().strftime(f"[{bot_time}]")),f"Loaded {f}")
+
 # sync commands
 @bot.event
 async def on_connect():

@@ -96,7 +96,7 @@ class moderation(commands.Cog):
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("minutes", int, description="Timeout duration", required=True)
     @discord.option("reason", str, description="Add a reason (optional)", required=False)
-    async def unban(self, ctx: commands.Context, member: discord.Member, minutes: int, reason: str = "*No reason given*") -> None:
+    async def timeout(self, ctx: commands.Context, member: discord.Member, minutes: int, reason: str = "*No reason given*") -> None:
         duration = datetime.timedelta(minutes=minutes)
 
         if member == ctx.author:
@@ -109,7 +109,6 @@ class moderation(commands.Cog):
         embed.set_thumbnail(url=member.avatar)
 
         try:
-            duration = datetime.timedelta(minutes=minutes)
             await member.timeout_for(duration, reason=f"{reason} - timed out by @{ctx.author.name}")
         except:
             await ctx.respond(f"Can't time out {member.mention}! Probably missing permissions, or you're trying to time out someone higher than me", ephemeral=True)
