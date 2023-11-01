@@ -51,7 +51,7 @@ bot.run(bot_token)
 # timeout members - done
 # purge messages - done
 # give/revoke roles
-# delete server invites
+# delete server invites - done
 # lock/unlock channel - done
 # set nickname for a member - done
 # softban members - done
