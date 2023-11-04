@@ -117,5 +117,43 @@ class moderation(commands.Cog):
 
 
 
+    @discord.slash_command(name="rolegive", description="Give a role to a member", guild_only=True)
+    @discord.commands.default_permissions(manage_roles=True)
+    @discord.option("member", discord.Member, description="Select a member", required=True)
+    @discord.option("role", discord.Role, description="Select a role", required=True)
+    async def rolegive(self, ctx, member: discord.Member, role: discord.Role):
+        if member == ctx.author:
+            return await ctx.respond(f"You can't give yourself roles!", ephemeral=True)
+        elif member == self.bot.user:
+            return await ctx.respond("You can't do that.", ephemeral=True)
+
+        try:
+            await member.add_roles(role, reason=f"added role by @{ctx.author.name}")
+        except:
+            return await ctx.respond(f"Failed to give role. Probably a higher role than mine, or {member.mention} already has that role", ephemeral=True)
+
+        await ctx.respond(f"Added the {role.mention} role to {member.mention}", ephemeral=True)
+
+
+
+    @discord.slash_command(name="rolerevoke", description="Revoke a role from a member", guild_only=True)
+    @discord.commands.default_permissions(manage_roles=True)
+    @discord.option("member", discord.Member, description="Select a member", required=True)
+    @discord.option("role", discord.Role, description="and select a role", required=True)
+    async def revoke_role(self, ctx, member: discord.Member, role: discord.Role):
+        if member == ctx.author:
+            return await ctx.respond(f"You can't revoke roles from yourself!", ephemeral=True)
+        elif member == self.bot.user:
+            return await ctx.respond("You can't do that.", ephemeral=True)
+
+        try:
+            await member.remove_roles(role, reason=f"removed role by @{ctx.author.name}")
+        except:
+            return await ctx.respond(f"Failed to remove role. Probably a higher role than mine, or {member.mention} doesn't have that role.", ephemeral=True)
+
+        await ctx.respond(f"Removed the {role.mention} role from {member.mention}", ephemeral=True)
+
+
+
 def setup(bot: commands.Bot) -> None:
     bot.add_cog(moderation(bot))

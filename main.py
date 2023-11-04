@@ -50,7 +50,7 @@ bot.run(bot_token)
 # moderation commands (kick, ban, etc.) - done
 # timeout members - done
 # purge messages - done
-# give/revoke roles
+# give/revoke roles - done
 # delete server invites - done
 # lock/unlock channel - done
 # set nickname for a member - done
