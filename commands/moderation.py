@@ -87,7 +87,7 @@ class moderation(commands.Cog):
             await member.unban(reason=f"{reason} - softbanned by @{ctx.author.name}")
             await ctx.respond(embed=embed)
         except:
-            await ctx.respond(f"Fauled to softban {member.mention}! Probably missing permissions, or you're trying to softban someone higher than me", ephemeral=True)
+            await ctx.respond(f"Failed to softban {member.mention}! Probably missing permissions, or you're trying to softban someone higher than me", ephemeral=True)
 
 
 
@@ -111,7 +111,7 @@ class moderation(commands.Cog):
         try:
             await member.timeout_for(duration, reason=f"{reason} - timed out by @{ctx.author.name}")
         except:
-            await ctx.respond(f"Can't time out {member.mention}! Probably missing permissions, or you're trying to time out someone higher than me", ephemeral=True)
+            await ctx.respond(f"Can't timeout {member.mention}! Probably missing permissions, or you're trying to time out someone higher than me", ephemeral=True)
 
         await ctx.respond(embed=embed)
 
