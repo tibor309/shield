@@ -22,9 +22,9 @@ class member(commands.Cog):
 
         try:
             await member.edit(nick=nickname, reason=f"{reason} - executed by @{ctx.author.name}")
-            await ctx.respond(embed=embed)
         except:
-            await ctx.respond(f"Failed change nickname for {member.mention}!", ephemeral=True)
+            return await ctx.respond(f"Failed to change nickname for {member.mention}! Probably missing permissions.", ephemeral=True)
+        await ctx.respond(embed=embed)
 
 
 
