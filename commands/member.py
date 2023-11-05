@@ -7,13 +7,13 @@ class member(commands.Cog):
         self.bot = bot
 
 
+    nickname = discord.SlashCommandGroup("nickname", "Manage nicknames", default_member_permissions=discord.Permissions(manage_nicknames=True), guild_only=True)
 
-    @discord.slash_command(name="nickname", description="Change nickname of a member", guild_only=True)
-    @discord.commands.default_permissions(manage_nicknames=True)
+    @nickname.command(name="set", description="Change nickname of a member")
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("nickname", str, description="Add new nickname", required=True)
     @discord.option("reason", str, description="Add a reason (optional)", required=False)
-    async def nickname(self, ctx: commands.Context, member: discord.Member, nickname: str, reason: str = "*No reason given*") -> None:
+    async def nickname_set(self, ctx: commands.Context, member: discord.Member, nickname: str, reason: str = "*No reason given*") -> None:
         embed = discord.Embed(color=bot_color, title=f"Changed nickname for {member.name}", description=f"**Reason:**\n{reason}", timestamp=discord.utils.utcnow())
         embed.set_author(name="Changed nickname", icon_url=member_icon)
         embed.add_field(name="Old nick", value=f"{member.nick}")
@@ -24,6 +24,22 @@ class member(commands.Cog):
             await member.edit(nick=nickname, reason=f"{reason} - executed by @{ctx.author.name}")
         except:
             return await ctx.respond(f"Failed to change nickname for {member.mention}! Probably missing permissions.", ephemeral=True)
+        await ctx.respond(embed=embed)
+
+
+    @nickname.command(name="reset", description="Reset nickname of a member")
+    @discord.option("member", discord.Member, description="Select a member", required=True)
+    @discord.option("reason", str, description="Add a reason (optional)", required=False)
+    async def nickname_reset(self, ctx: commands.Context, member: discord.Member, reason: str = "*No reason given*") -> None:
+        embed = discord.Embed(color=bot_color, title=f"Nickname for {member.name} has been reset", description=f"**Reason:**\n{reason}", timestamp=discord.utils.utcnow())
+        embed.set_author(name="Changed nickname", icon_url=member_icon)
+        embed.add_field(name="Old nick", value=f"{member.nick}")
+        embed.set_thumbnail(url=member.avatar)
+
+        try:
+            await member.edit(nick=None, reason=f"{reason} - executed by @{ctx.author.name}")
+        except:
+            return await ctx.respond(f"Failed to reset nickname for {member.mention}! Probably missing permissions.", ephemeral=True)
         await ctx.respond(embed=embed)
 
 
