@@ -1,4 +1,4 @@
-# Shield
+# 🛡️ Shield
 Shield is a basic moderation discord bot that helps keepig your server clean. You can kick, ban, softban members, manage roles/chat, and a few more.
 
 <div id="badges", align="center">

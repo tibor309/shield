@@ -30,9 +30,9 @@ class moderation(commands.Cog):
 
         try:
             await member.kick(reason=f"{reason} - kicked by @{ctx.author.name}")
-            await ctx.respond(embed=embed)
         except:
             await ctx.respond(f"Can't kick {member.mention}! Probably missing permissions, or you're trying to kick someone higher than me", ephemeral=True)
+        await ctx.respond(embed=embed)
 
 
 
@@ -57,9 +57,9 @@ class moderation(commands.Cog):
 
         try:
             await member.ban(reason=f"{reason} - banned by @{ctx.author.name}")
-            await ctx.respond(embed=embed)
         except:
-            await ctx.respond(f"Can't ban {member.mention}! Probably missing permissions, or you're trying to ban someone higher than me", ephemeral=True)
+            return await ctx.respond(f"Can't ban {member.mention}! Probably missing permissions, or you're trying to ban someone higher than me", ephemeral=True)
+        await ctx.respond(embed=embed)
 
 
 
@@ -85,9 +85,9 @@ class moderation(commands.Cog):
         try:
             await member.ban(reason=f"{reason} - softbanned by @{ctx.author.name}", delete_message_seconds=604800)
             await member.unban(reason=f"{reason} - softbanned by @{ctx.author.name}")
-            await ctx.respond(embed=embed)
         except:
-            await ctx.respond(f"Fauled to softban {member.mention}! Probably missing permissions, or you're trying to softban someone higher than me", ephemeral=True)
+            return await ctx.respond(f"Failed to softban {member.mention}! Probably missing permissions, or you're trying to softban someone higher than me", ephemeral=True)
+        await ctx.respond(embed=embed)
 
 
 
@@ -111,8 +111,7 @@ class moderation(commands.Cog):
         try:
             await member.timeout_for(duration, reason=f"{reason} - timed out by @{ctx.author.name}")
         except:
-            await ctx.respond(f"Can't time out {member.mention}! Probably missing permissions, or you're trying to time out someone higher than me", ephemeral=True)
-
+            return await ctx.respond(f"Can't timeout {member.mention}! Probably missing permissions, or you're trying to time out someone higher than me", ephemeral=True)
         await ctx.respond(embed=embed)
 
 
@@ -131,7 +130,6 @@ class moderation(commands.Cog):
             await member.add_roles(role, reason=f"added role by @{ctx.author.name}")
         except:
             return await ctx.respond(f"Failed to give role. Probably a higher role than mine, or {member.mention} already has that role", ephemeral=True)
-
         await ctx.respond(f"Added the {role.mention} role to {member.mention}", ephemeral=True)
 
 
@@ -150,7 +148,6 @@ class moderation(commands.Cog):
             await member.remove_roles(role, reason=f"removed role by @{ctx.author.name}")
         except:
             return await ctx.respond(f"Failed to remove role. Probably a higher role than mine, or {member.mention} doesn't have that role.", ephemeral=True)
-
         await ctx.respond(f"Removed the {role.mention} role from {member.mention}", ephemeral=True)
 
 
