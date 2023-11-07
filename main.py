@@ -51,6 +51,10 @@ async def on_message(message):
 async def on_application_command(ctx: discord.ApplicationContext) -> None: #log command execution
     print((discord.utils.utcnow().strftime(f"[{bot_time}]")), f"User @{ctx.author.name} (ID:{ctx.author.id}) used the '{ctx.command.qualified_name}' command")
 
+# joined new guild
+async def on_guild_join(guild: discord.Guild) -> None:
+    print((discord.utils.utcnow().strftime(f"[{bot_time}]")), f"Joined new guild: '{guild.name}' (ID:{guild.id})")
+
 # error checks
 @bot.event
 async def on_application_command_error(ctx: discord.ApplicationContext, error) -> None: #log app command error
