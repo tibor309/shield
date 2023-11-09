@@ -29,7 +29,7 @@ pip3 install -r requirements.txt
 ## Docker
 You can also run the bot on docker. But you won't be able to customize the configuration. Simply add your token as an env variable, run the command, and you're done. 
 ```
-docker run -d -it -e TOKEN=your-bot-token tibor309/toolbox:latest
+docker run -d -it -e TOKEN=your-bot-token tibor309/shield:latest
 ```
 
 ## Configuration
