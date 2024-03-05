@@ -18,7 +18,7 @@ class member(commands.Cog):
         embed.set_author(name="Changed nickname", icon_url=member_icon)
         embed.add_field(name="Old nick", value=f"{member.nick}")
         embed.add_field(name="New new", value=f"{nickname}")
-        embed.set_thumbnail(url=member.avatar)
+        embed.set_thumbnail(url=member.display_avatar)
 
         try:
             await member.edit(nick=nickname, reason=f"{reason} - executed by @{ctx.author.name}")
@@ -34,7 +34,7 @@ class member(commands.Cog):
         embed = discord.Embed(color=bot_color, title=f"Nickname for {member.name} has been reset", description=f"**Reason:**\n{reason}", timestamp=discord.utils.utcnow())
         embed.set_author(name="Changed nickname", icon_url=member_icon)
         embed.add_field(name="Old nick", value=f"{member.nick}")
-        embed.set_thumbnail(url=member.avatar)
+        embed.set_thumbnail(url=member.display_avatar)
 
         try:
             await member.edit(nick=None, reason=f"{reason} - executed by @{ctx.author.name}")
@@ -93,22 +93,28 @@ class member(commands.Cog):
     @discord.slash_command(name="memberinfo", description="Get info about a member")
     @discord.option("member", discord.Member, description="Select someone", required=True)
     async def member_info(self, ctx, member: discord.Member) -> None:
+        if member.is_migrated == False:
+            membername = f"{member.name}#{member.discriminator}"
+        else:
+            membername = member.name
+
         creation_time = int(member.created_at.timestamp())
         join_time = int(member.joined_at.timestamp())
     
         embed = discord.Embed(color=bot_color)
-        embed.set_thumbnail(url=member.avatar)
+        embed.set_thumbnail(url=member.display_avatar)
         embed.set_author(name="Member info", icon_url=member_icon)
-        embed.add_field(name="Username", value=member.name, inline=True)
+        embed.add_field(name="Display name", value=member.display_name, inline=True)
         embed.add_field(name="Nickname", value=member.nick, inline=True)
+        embed.add_field(name="Username", value=membername, inline=True)
         embed.add_field(name="Status", value=member.status, inline=True)
 
         embed.add_field(name="Server booster", value=bool(member.premium_since), inline=True)
         embed.add_field(name="Bot", value=member.bot, inline=True)
         embed.add_field(name="User ID", value=f"||{member.id}||", inline=True)
         
-        embed.add_field(name="Account created", value=f"<t:{creation_time}:R>", inline=True)
-        embed.add_field(name="Joined server", value=f"<t:{join_time}:R>", inline=True)
+        embed.add_field(name="Account created", value=f"<t:{creation_time}:R>")
+        embed.add_field(name="Joined server", value=f"<t:{join_time}:R>")
         await ctx.respond(embed=embed)
 
 

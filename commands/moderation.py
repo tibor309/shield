@@ -26,7 +26,7 @@ class moderation(commands.Cog):
         embed.set_author(name="Member kicked", icon_url=member_icon)
         embed.add_field(name="Account Created", value=f"<t:{create_time}:R>")
         embed.add_field(name="Joined Server", value=f"<t:{join_time}:R>")
-        embed.set_thumbnail(url=member.avatar)
+        embed.set_thumbnail(url=member.display_avatar)
 
         try:
             await member.kick(reason=f"{reason} - kicked by @{ctx.author.name}")
@@ -53,7 +53,7 @@ class moderation(commands.Cog):
         embed.set_author(name="Member banned", icon_url=member_icon)
         embed.add_field(name="Account Created", value=f"<t:{create_time}:R>")
         embed.add_field(name="Joined Server", value=f"<t:{join_time}:R>")
-        embed.set_thumbnail(url=member.avatar)
+        embed.set_thumbnail(url=member.display_avatar)
 
         try:
             await member.ban(reason=f"{reason} - banned by @{ctx.author.name}")
@@ -80,7 +80,7 @@ class moderation(commands.Cog):
         embed.set_author(name="Member softbanned", icon_url=member_icon)
         embed.add_field(name="Account Created", value=f"<t:{create_time}:R>")
         embed.add_field(name="Joined Server", value=f"<t:{join_time}:R>")
-        embed.set_thumbnail(url=member.avatar)
+        embed.set_thumbnail(url=member.display_avatar)
 
         try:
             await member.ban(reason=f"{reason} - softbanned by @{ctx.author.name}", delete_message_seconds=604800)
@@ -106,7 +106,7 @@ class moderation(commands.Cog):
 
         embed = discord.Embed(color=bot_color, title=f"{member.name} has been timed out!", description=f"**Duration:** {minutes} minutes\n**Reason:** {reason}", timestamp=discord.utils.utcnow())
         embed.set_author(name="Member timed out", icon_url=member_icon)
-        embed.set_thumbnail(url=member.avatar)
+        embed.set_thumbnail(url=member.display_avatar)
 
         try:
             await member.timeout_for(duration, reason=f"{reason} - timed out by @{ctx.author.name}")
