@@ -10,7 +10,7 @@ class invites(commands.Cog):
 
     @discord.slash_command(name="delallinvites", description="Delete ALL active server invites", guild_only=True)
     @discord.commands.default_permissions(manage_guild=True)
-    async def invites_list(self, ctx: commands.Context) -> None:
+    async def invites_list(self, ctx) -> None:
         await ctx.defer()
         guild = ctx.guild
         try:

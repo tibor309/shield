@@ -11,7 +11,7 @@ class messages(commands.Cog):
     @discord.slash_command(name="clear", description="Delete messages", guild_only=True)
     @discord.commands.default_permissions(manage_messages=True)
     @discord.option("messages", int, description="Number of messages", required=True)
-    async def clear(self, ctx: commands.Context, messages: int) -> None:
+    async def clear(self, ctx, messages: int) -> None:
         await ctx.defer(ephemeral=True)
 
         try:

@@ -13,7 +13,7 @@ class member(commands.Cog):
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("nickname", str, description="Add new nickname", required=True)
     @discord.option("reason", str, description="Add a reason (optional)", required=False)
-    async def nickname_set(self, ctx: commands.Context, member: discord.Member, nickname: str, reason: str = "*No reason given*") -> None:
+    async def nickname_set(self, ctx, member: discord.Member, nickname: str, reason: str = "*No reason given*") -> None:
         embed = discord.Embed(color=bot_color, title=f"Changed nickname for {member.name}", description=f"**Reason:**\n{reason}", timestamp=discord.utils.utcnow())
         embed.set_author(name="Changed nickname", icon_url=member_icon)
         embed.add_field(name="Old nick", value=f"{member.nick}")
@@ -30,7 +30,7 @@ class member(commands.Cog):
     @nickname.command(name="reset", description="Reset nickname of a member")
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("reason", str, description="Add a reason (optional)", required=False)
-    async def nickname_reset(self, ctx: commands.Context, member: discord.Member, reason: str = "*No reason given*") -> None:
+    async def nickname_reset(self, ctx, member: discord.Member, reason: str = "*No reason given*") -> None:
         embed = discord.Embed(color=bot_color, title=f"Nickname for {member.name} has been reset", description=f"**Reason:**\n{reason}", timestamp=discord.utils.utcnow())
         embed.set_author(name="Changed nickname", icon_url=member_icon)
         embed.add_field(name="Old nick", value=f"{member.nick}")
@@ -48,7 +48,7 @@ class member(commands.Cog):
     @discord.commands.default_permissions(deafen_members=True)
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("state", bool, description="Toggle deafen", required=True)
-    async def deafen(self, ctx: commands.Context, member: discord.Member, state: bool) -> None:
+    async def deafen(self, ctx, member: discord.Member, state: bool) -> None:
         if member == ctx.author:
             return await ctx.respond(f"You can't server deafen yourself!", ephemeral=True)
         elif member == self.bot.user:
@@ -71,7 +71,7 @@ class member(commands.Cog):
     @discord.commands.default_permissions(mute_members=True)
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("state", bool, description="Toggle mute", required=True)
-    async def mute(self, ctx: commands.Context, member: discord.Member, state: bool) -> None:
+    async def mute(self, ctx, member: discord.Member, state: bool) -> None:
         if member == ctx.author:
             return await ctx.respond(f"You can't server mute yourself!", ephemeral=True)
         elif member == self.bot.user:
@@ -92,7 +92,7 @@ class member(commands.Cog):
 
     @discord.slash_command(name="memberinfo", description="Get info about a member")
     @discord.option("member", discord.Member, description="Select someone", required=True)
-    async def member_info(self, ctx: commands.Context, member: discord.Member) -> None:
+    async def member_info(self, ctx, member: discord.Member) -> None:
         creation_time = int(member.created_at.timestamp())
         join_time = int(member.joined_at.timestamp())
     

@@ -13,7 +13,7 @@ class moderation(commands.Cog):
     @discord.commands.default_permissions(kick_members=True)
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("reason", str, description="Add a reason (optional)", required=False)
-    async def kick(self, ctx: commands.Context, member: discord.Member, reason: str = "*No reason given*") -> None:
+    async def kick(self, ctx, member: discord.Member, reason: str = "*No reason given*") -> None:
         create_time = int(member.created_at.timestamp())
         join_time = int(member.joined_at.timestamp())
 
@@ -40,7 +40,7 @@ class moderation(commands.Cog):
     @discord.commands.default_permissions(ban_members=True)
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("reason", str, description="Add a reason (optional)", required=False)
-    async def ban(self, ctx: commands.Context, member: discord.Member, reason: str = "*No reason given*") -> None:
+    async def ban(self, ctx, member: discord.Member, reason: str = "*No reason given*") -> None:
         create_time = int(member.created_at.timestamp())
         join_time = int(member.joined_at.timestamp())
 
@@ -67,7 +67,7 @@ class moderation(commands.Cog):
     @discord.commands.default_permissions(ban_members=True)
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("reason", str, description="Add a reason (optional)", required=False)
-    async def softban(self, ctx: commands.Context, member: discord.Member, reason: str = "*No reason given*") -> None:
+    async def softban(self, ctx, member: discord.Member, reason: str = "*No reason given*") -> None:
         create_time = int(member.created_at.timestamp())
         join_time = int(member.joined_at.timestamp())
 
@@ -96,7 +96,7 @@ class moderation(commands.Cog):
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("minutes", int, description="Timeout duration", required=True)
     @discord.option("reason", str, description="Add a reason (optional)", required=False)
-    async def timeout(self, ctx: commands.Context, member: discord.Member, minutes: int, reason: str = "*No reason given*") -> None:
+    async def timeout(self, ctx, member: discord.Member, minutes: int, reason: str = "*No reason given*") -> None:
         duration = datetime.timedelta(minutes=minutes)
 
         if member == ctx.author:

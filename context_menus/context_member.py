@@ -11,7 +11,7 @@ class context_member(commands.Cog):
 
     @discord.user_command(name="Timeout for 3 days", guild_only=True)
     @discord.commands.default_permissions(moderate_members=True)
-    async def context_timeout(self, ctx: commands.Context, member: discord.Member) -> None:
+    async def context_timeout(self, ctx, member: discord.Member) -> None:
         days = 3
         duration = datetime.timedelta(days=days)
 
@@ -35,7 +35,7 @@ class context_member(commands.Cog):
     
     @discord.user_command(name="Softban", guild_only=True)
     @discord.commands.default_permissions(ban_members=True)
-    async def context_softban(self, ctx: commands.Context, member: discord.Member) -> None:
+    async def context_softban(self, ctx, member: discord.Member) -> None:
         create_time = int(member.created_at.timestamp())
         join_time = int(member.joined_at.timestamp())
 
