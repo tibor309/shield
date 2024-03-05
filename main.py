@@ -1,11 +1,13 @@
 import discord
 from discord.ext import commands
 import os
-from config import bot_time, bot_token
+from config import bot_time
+from config import bot_token
 
 intents = discord.Intents.default()
 intents.members = True
 intents.presences = True
+
 bot = commands.Bot(intents=intents, help_command=None)
 
 # load commands
@@ -71,16 +73,3 @@ async def on_application_command_error(ctx: discord.ApplicationContext, error) -
 
 
 bot.run(bot_token)
-
-# TODO:
-# moderation commands (kick, ban, etc.) - done
-# timeout members - done
-# purge messages - done
-# give/revoke roles - done
-# delete server invites - done
-# lock/unlock channel - done
-# set nickname for a member - done
-# softban members - done
-# un/deafen members - done
-# mute members - done
-# member info - done
