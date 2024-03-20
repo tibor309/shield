@@ -1,7 +1,9 @@
 import discord
 from discord.ext import commands
+
 from config import bot_color
 from config import member_icon
+
 
 class member(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
@@ -122,3 +124,4 @@ class member(commands.Cog):
 
 def setup(bot: commands.Bot) -> None:
     bot.add_cog(member(bot))
+    

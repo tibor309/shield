@@ -1,10 +1,10 @@
 import discord
 from discord.ext import commands
 
+
 class invites(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
-
 
 
     @discord.slash_command(name="delallinvites", description="Delete ALL active server invites", guild_only=True)
@@ -24,3 +24,4 @@ class invites(commands.Cog):
 
 def setup(bot: commands.Bot) -> None:
     bot.add_cog(invites(bot))
+    

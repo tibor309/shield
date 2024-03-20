@@ -1,13 +1,14 @@
+import datetime
 import discord
 from discord.ext import commands
-import datetime
+
 from config import bot_color
 from config import member_icon
+
 
 class context_member(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
-
 
 
     @discord.user_command(name="Timeout for 3 days", guild_only=True)
@@ -63,3 +64,4 @@ class context_member(commands.Cog):
 
 def setup(bot: commands.Bot) -> None:
     bot.add_cog(context_member(bot))
+    

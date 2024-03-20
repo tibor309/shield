@@ -1,13 +1,14 @@
+import datetime
 import discord
 from discord.ext import commands
-import datetime
+
 from config import bot_color
 from config import member_icon
+
 
 class moderation(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
-
 
 
     @discord.slash_command(name="kick", description="Kick a member", guild_only=True)
@@ -155,3 +156,4 @@ class moderation(commands.Cog):
 
 def setup(bot: commands.Bot) -> None:
     bot.add_cog(moderation(bot))
+    

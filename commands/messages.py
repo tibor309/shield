@@ -1,11 +1,11 @@
+from asyncio import sleep
 import discord
 from discord.ext import commands
-from asyncio import sleep
+
 
 class messages(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
-
 
 
     @discord.slash_command(name="clear", description="Delete messages", guild_only=True)
@@ -25,3 +25,4 @@ class messages(commands.Cog):
 
 def setup(bot: commands.Bot) -> None:
     bot.add_cog(messages(bot))
+    

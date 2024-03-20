@@ -1,10 +1,10 @@
 import discord
 from discord.ext import commands
 
+
 class channel(commands.Cog):
     def __init__(self, bot: commands.Bot) -> None:
         self.bot = bot
-
 
 
     @discord.slash_command(name="lock", description="Lock or unlock a channel", guild_only=True)
@@ -27,3 +27,4 @@ class channel(commands.Cog):
 
 def setup(bot: commands.Bot) -> None:
     bot.add_cog(channel(bot))
+    
