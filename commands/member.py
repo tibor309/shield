@@ -42,7 +42,7 @@ class member(commands.Cog):
         try:
             await member.edit(nick=None, reason=f"{reason} - executed by @{ctx.author.name}")
         except:
-            return await ctx.respond(f"Failed to reset nickname for {member.mention}! Probably missing permissions.", ephemeral=True)
+            return await ctx.respond("Failed to reset nickname for {member.mention}! Probably missing permissions.", ephemeral=True)
         await ctx.respond(embed=embed)
 
 
@@ -53,7 +53,7 @@ class member(commands.Cog):
     @discord.option("state", bool, description="Toggle deafen", required=True)
     async def deafen(self, ctx, member: discord.Member, state: bool) -> None:
         if member == ctx.author:
-            return await ctx.respond(f"You can't server deafen yourself!", ephemeral=True)
+            return await ctx.respond("You can't server deafen yourself!", ephemeral=True)
         elif member == self.bot.user:
             return await ctx.respond("you can't do that", ephemeral=True)
 
@@ -76,7 +76,7 @@ class member(commands.Cog):
     @discord.option("state", bool, description="Toggle mute", required=True)
     async def mute(self, ctx, member: discord.Member, state: bool) -> None:
         if member == ctx.author:
-            return await ctx.respond(f"You can't server mute yourself!", ephemeral=True)
+            return await ctx.respond("You can't server mute yourself!", ephemeral=True)
         elif member == self.bot.user:
             return await ctx.respond("you can't do that", ephemeral=True)
 

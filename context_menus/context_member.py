@@ -18,7 +18,7 @@ class context_member(commands.Cog):
         duration = datetime.timedelta(days=days)
 
         if member == ctx.author:
-            return await ctx.respond(f"You can't timeout yourself", ephemeral=True)
+            return await ctx.respond("You can't timeout yourself", ephemeral=True)
         elif member == self.bot.user:
             return await ctx.respond("Nuh uh!", ephemeral=True)
 
@@ -42,7 +42,7 @@ class context_member(commands.Cog):
         join_time = int(member.joined_at.timestamp())
 
         if member == ctx.author:
-            return await ctx.respond(f"You can't softban yourself", ephemeral=True)
+            return await ctx.respond("You can't softban yourself", ephemeral=True)
         elif member == self.bot.user:
             return await ctx.respond("Nope", ephemeral=True)
 

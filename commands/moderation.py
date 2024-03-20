@@ -7,7 +7,7 @@ from config import member_icon
 
 
 class moderation(commands.Cog):
-    def __init__(self, bot: commands.Bot) -> None:
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
 
@@ -15,12 +15,12 @@ class moderation(commands.Cog):
     @discord.commands.default_permissions(kick_members=True)
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("reason", str, description="Add a reason (optional)", required=False)
-    async def kick(self, ctx, member: discord.Member, reason: str = "*No reason given*") -> None:
+    async def kick(self, ctx, member: discord.Member, reason: str = "*No reason given*"):
         create_time = int(member.created_at.timestamp())
         join_time = int(member.joined_at.timestamp())
 
         if member == ctx.author:
-            return await ctx.respond(f"You can't kick yourself", ephemeral=True)
+            return await ctx.respond("You can't kick yourself", ephemeral=True)
         elif member == self.bot.user:
             return await ctx.respond("You can't do that 😑", ephemeral=True)
 
@@ -42,12 +42,12 @@ class moderation(commands.Cog):
     @discord.commands.default_permissions(ban_members=True)
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("reason", str, description="Add a reason (optional)", required=False)
-    async def ban(self, ctx, member: discord.Member, reason: str = "*No reason given*") -> None:
+    async def ban(self, ctx, member: discord.Member, reason: str = "*No reason given*"):
         create_time = int(member.created_at.timestamp())
         join_time = int(member.joined_at.timestamp())
 
         if member == ctx.author:
-            return await ctx.respond(f"You can't ban yourself", ephemeral=True)
+            return await ctx.respond("You can't ban yourself", ephemeral=True)
         elif member == self.bot.user:
             return await ctx.respond("I'm not banning myself", ephemeral=True)
 
@@ -69,12 +69,12 @@ class moderation(commands.Cog):
     @discord.commands.default_permissions(ban_members=True)
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("reason", str, description="Add a reason (optional)", required=False)
-    async def softban(self, ctx, member: discord.Member, reason: str = "*No reason given*") -> None:
+    async def softban(self, ctx, member: discord.Member, reason: str = "*No reason given*"):
         create_time = int(member.created_at.timestamp())
         join_time = int(member.joined_at.timestamp())
 
         if member == ctx.author:
-            return await ctx.respond(f"You can't softban yourself", ephemeral=True)
+            return await ctx.respond("You can't softban yourself", ephemeral=True)
         elif member == self.bot.user:
             return await ctx.respond("Nope", ephemeral=True)
 
@@ -98,7 +98,7 @@ class moderation(commands.Cog):
     @discord.option("member", discord.Member, description="Select a member", required=True)
     @discord.option("minutes", int, description="Timeout duration", required=True)
     @discord.option("reason", str, description="Add a reason (optional)", required=False)
-    async def timeout(self, ctx, member: discord.Member, minutes: int, reason: str = "*No reason given*") -> None:
+    async def timeout(self, ctx, member: discord.Member, minutes: int, reason: str = "*No reason given*"):
         duration = datetime.timedelta(minutes=minutes)
 
         if member == ctx.author:
@@ -154,6 +154,6 @@ class moderation(commands.Cog):
 
 
 
-def setup(bot: commands.Bot) -> None:
+def setup(bot: commands.Bot):
     bot.add_cog(moderation(bot))
     

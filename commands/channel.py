@@ -3,7 +3,7 @@ from discord.ext import commands
 
 
 class channel(commands.Cog):
-    def __init__(self, bot: commands.Bot) -> None:
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
 
@@ -11,7 +11,7 @@ class channel(commands.Cog):
     @discord.commands.default_permissions(manage_channels=True)
     @discord.option("channel", discord.TextChannel, description="Select a channel if you want too", required=True)
     @discord.option("state", bool, description="Toggle channel lock", required=True)
-    async def channel_lock(self, ctx, channel: discord.TextChannel, state: bool) -> None:
+    async def channel_lock(self, ctx, channel: discord.TextChannel, state: bool):
         try:
             if state == True:
                 await channel.set_permissions(ctx.guild.default_role, send_messages=True, reason=f"executed by @{ctx.author.name}")
@@ -25,6 +25,6 @@ class channel(commands.Cog):
 
 
 
-def setup(bot: commands.Bot) -> None:
+def setup(bot: commands.Bot):
     bot.add_cog(channel(bot))
     

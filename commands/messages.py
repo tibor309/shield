@@ -4,14 +4,14 @@ from discord.ext import commands
 
 
 class messages(commands.Cog):
-    def __init__(self, bot: commands.Bot) -> None:
+    def __init__(self, bot: commands.Bot):
         self.bot = bot
 
 
     @discord.slash_command(name="clear", description="Delete messages", guild_only=True)
     @discord.commands.default_permissions(manage_messages=True)
     @discord.option("messages", int, description="Number of messages", required=True)
-    async def clear(self, ctx, messages: int) -> None:
+    async def clear(self, ctx, messages: int):
         await ctx.defer(ephemeral=True)
 
         try:
@@ -23,6 +23,6 @@ class messages(commands.Cog):
 
 
 
-def setup(bot: commands.Bot) -> None:
+def setup(bot: commands.Bot):
     bot.add_cog(messages(bot))
     
