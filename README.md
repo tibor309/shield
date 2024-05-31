@@ -1,20 +1,8 @@
 # 🛡️ Shield
 Shield is a basic moderation discord bot that helps keepig your server clean. You can kick, ban, softban members, manage roles/chat, and a few more.
 
-<div id="badges", align="center">
-  <a href="https://repl.it/github/tibor309/shield">
-    <img src="https://img.shields.io/badge/Replit-a6e3a1.svg?style=for-the-badge&logo=Replit&logoColor=gray&labelColor=b5ffb4&label=Run on" alt="Replit_badge"/>
-  </a>
-  <a href="https://glitch.com/edit/#!/import/github/tibor309/shield">
-    <img src="https://img.shields.io/badge/Glitch-a6e3a1.svg?style=for-the-badge&logo=Glitch&logoColor=gray&labelColor=b5ffb4&label=Remix on" alt="glitch_badge"/>
-  </a>
-  <a href="https://hub.docker.com/r/tibor309/shield">
-    <img src="https://img.shields.io/badge/Docker-a6e3a1.svg?style=for-the-badge&logo=Docker&logoColor=gray&labelColor=b5ffb4&label=Pull from" alt="Docker_badge"/>
-  </a>
-  <a href="https://discord.com/api/oauth2/authorize?client_id=1164523697902719026&permissions=8&scope=bot%20applications.commands">
-    <img src="https://img.shields.io/badge/Discord-a6e3a1?style=for-the-badge&logo=discord&logoColor=gray&labelColor=b5ffb4&label=Invite to" alt="Discord_badge"/>
-  </a>
-</div>
+>[!Warning]
+> This project has been deprecated, because I'm moving to discord.py. You can still run the bot, and most of the commands work just fine.
 
 ## Setup
 ### Replit and Glitch
@@ -31,13 +19,6 @@ Then create a secrets file, and set your bot token. After that, run the command 
 
 ```bash
 python3 main.py
-```
-
-## Docker
-You can also run the bot on docker. But you won't be able to customize the configuration. Simply add your token as an env variable, run the command, and you're done. 
-
-```bash
-docker run -d -it -e TOKEN=your-bot-token tibor309/shield:latest
 ```
 
 ## Configuration
